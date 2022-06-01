@@ -1,55 +1,52 @@
-const axios = require('axios').default;
-const { branches } = require('../config');
+import React, { useState } from "react";
+import { Button, Card, Container, CardContent, Grid, TextField, Typography } from '@mui/material';
 
-const findDates = (results) => {
-  return results.map(request => {
-    const idBranch = request.value.config.params.planta_id;
-    const branch = branches.find(branch => branch.id === idBranch);
 
-    if (request.value.data.results.length != 0) {
-      const dates = request.value.data.results;
+export default function HomePageV2() {
+  const [ disabled, setDisabled ] = useState(true);
+  const [ domain, setDomain ] = useState();
 
-      return { name: branch.name, dates };
+  const onChangeInput = (event) => {
+    const value = event.target.value;
+    if (value.length < 6) {
+      setDisabled(true);
     }
-    return { name: branch.name, dates: []};
-  })
-};
+    if (value.length >= 6) {
+      setDisabled(false);
+      setDomain(value);
+    }
+  }
 
-const check = async () => {
-  const cookieVtv = "_vtv_session=GHDomM5Cj%2BYC1kqm5IiOlo98dRu0iB3zgVXx2s%2B25tYe7x6Iy7zTpVwGnd734q5rB53VZwKI4koUpaFMC0hBgfiNcRyhVe%2BlLpIwTEWaN1%2BtgOJlQH7gi9rnzSObcbN3lBkmSyTNYP9YG%2FcjQ1lpzf2sVaPzi5N7vIF4mDruJDYPJrWm2BANpdX%2FvDjnARiS2b5CgDmV3omMSjxF69CSKPatWfXme49If8tqTEf%2BsgLsXiTW%2Bqb6McxjlE%2FnMVhGHUMCdm%2FtPEzQXDHMSlT4GbL0ia05gjfncb%2BMGw1agHixrLOxkgmysBrM9mc%3D--52VNPKoXrYNDeMHa--OKdoY0%2FNhPIBbc%2BEGv4CtQ%3D%3D"; 
-  const url = 'https://vtvpba.minfra.gba.gob.ar/turnos_por_fechas.json';
+  const handleClick = () => {
+    window.location.href = `/v2/check?domain=${domain}`;
+  }
 
-  const requests = branches.map((branch) => {
-    return axios.get(url, {
-      params: {
-        planta_id: branch.id,
-        dominio: 'nkn450'
-      },
-      headers: {
-        Cookie: cookieVtv
-      }
-    });
-  });
-
-  const results = await Promise.allSettled(requests);
-
-  return results;
+  return (
+    <Container maxWidth="sm" sx={{
+      marginTop: '18%'
+    }}>
+      <Card>
+        <CardContent>
+          <Grid item xs container direction="column" spacing={2}>
+            <Grid item xs>
+              <Typography variant="h1">Bienvenido!</Typography>
+              <TextField
+                id="outlined-required"
+                label="Ingrese su dominio"
+                defaultValue=""
+                sx={{ marginTop: '20px'}}
+                onChange={onChangeInput}
+              />
+            </Grid>
+            <Grid item xs>
+              {
+                disabled ? <Button disabled>Revisar turnos</Button> : <Button variant="contained" onClick={handleClick}>Revisar turnos</Button>
+              }
+              
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+    </Container>
+  );
 }
-
-function HomePage({ dates }) {
-  return <div>
-    <ul>{dates.map((date) => {
-      return <li> {date.name}: {date.dates.map(date => { return `${date.fecha} | `; })} </li>
-    })}
-    </ul>
-  </div>
-}
-
-HomePage.getInitialProps = async () => {
-  const results = await check();
-  const dates = findDates(results);
-
-  return { dates };
-}
-  
-export default HomePage
