@@ -36,8 +36,8 @@ export default function HomePageV2() {
           <Grid item xs container direction="column" spacing={2}>
             <Grid item xs>
               <Typography variant="h1">Bienvenido!</Typography>
-              <Typography variant="p">Simplemente consultamos los turnos disponibles en 7 plantas verificadoras de Gran Buenos Aires.</Typography>
-              <Typography variant="p">Próximamente ampliaremos a más plantas y ordenadas por cercanía</Typography>
+              <Typography variant="body1">Simplemente consultamos los turnos disponibles en 7 plantas verificadoras de Gran Buenos Aires.</Typography>
+              <Typography variant="body1">Próximamente ampliaremos a más plantas y ordenadas por cercanía</Typography>
               <TextField
                 id="outlined-required"
                 label="Ingrese su dominio"
