@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card, Container, CardContent, FormGroup, Grid, TextField, Typography } from '@mui/material';
+import { Button, Card, Container, CardContent, Grid, TextField, Typography } from '@mui/material';
 
 export default function HomePageV2() {
   const [ disabled, setDisabled ] = useState(true);
@@ -17,7 +17,7 @@ export default function HomePageV2() {
   }
 
   const handleClick = () => {
-    window.location.href = `/v2/check?domain=${domain}`;
+    window.location.href = `/check?domain=${domain}`;
   }
 
   const keyPress = (e) => {
@@ -34,25 +34,23 @@ export default function HomePageV2() {
       <Card>
         <CardContent>
           <Grid item xs container direction="column" spacing={2}>
-            <FormGroup>
-              <Grid item xs>
-                <Typography variant="h1">Bienvenido!</Typography>
-                <TextField
-                  id="outlined-required"
-                  label="Ingrese su dominio"
-                  defaultValue=""
-                  sx={{ marginTop: '20px'}}
-                  onChange={onChangeInput}
-                  onKeyDown={keyPress}
-                />
-              </Grid>
-              <Grid item xs>
-                {
-                  disabled ? <Button disabled>Revisar turnos</Button> : <Button variant="contained" onClick={handleClick}>Revisar turnos</Button>
-                }
-                
-              </Grid>
-            </FormGroup>
+            <Grid item xs>
+              <Typography variant="h1">Bienvenido!</Typography>
+              <TextField
+                id="outlined-required"
+                label="Ingrese su dominio"
+                defaultValue=""
+                sx={{ marginTop: '20px'}}
+                onChange={onChangeInput}
+                onKeyDown={keyPress}
+              />
+            </Grid>
+            <Grid item xs>
+              {
+                disabled ? <Button disabled>Revisar turnos</Button> : <Button variant="contained" onClick={handleClick}>Revisar turnos</Button>
+              }
+              
+            </Grid>
           </Grid>
         </CardContent>
       </Card>
