@@ -17,7 +17,8 @@ const findDates = (results) => {
   
 const check = async (domain) => {
   console.log(':::::::::: 🚗 🚕 🚙 Consultando por:', domain);
-  const cookieVtv = "_vtv_session=GHDomM5Cj%2BYC1kqm5IiOlo98dRu0iB3zgVXx2s%2B25tYe7x6Iy7zTpVwGnd734q5rB53VZwKI4koUpaFMC0hBgfiNcRyhVe%2BlLpIwTEWaN1%2BtgOJlQH7gi9rnzSObcbN3lBkmSyTNYP9YG%2FcjQ1lpzf2sVaPzi5N7vIF4mDruJDYPJrWm2BANpdX%2FvDjnARiS2b5CgDmV3omMSjxF69CSKPatWfXme49If8tqTEf%2BsgLsXiTW%2Bqb6McxjlE%2FnMVhGHUMCdm%2FtPEzQXDHMSlT4GbL0ia05gjfncb%2BMGw1agHixrLOxkgmysBrM9mc%3D--52VNPKoXrYNDeMHa--OKdoY0%2FNhPIBbc%2BEGv4CtQ%3D%3D"; 
+  const session = await axios.get('https://vtvpba.minfra.gba.gob.ar/SolicitudTurno');
+  const cookieVtv = session.headers['set-cookie'][0].split(';')[0]; 
   const url = 'https://vtvpba.minfra.gba.gob.ar/turnos_por_fechas.json';
 
   const requests = branches.map((branch) => {

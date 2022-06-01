@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Card, Container, CardContent, Grid, TextField, Typography } from '@mui/material';
 
-export default function HomePageV2() {
+function HomePageV2() {
   const [ disabled, setDisabled ] = useState(true);
   const [ domain, setDomain ] = useState();
 
@@ -59,3 +59,5 @@ export default function HomePageV2() {
     </Container>
   );
 }
+
+export default HomePageV2
