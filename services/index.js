@@ -65,7 +65,7 @@ const check = async (domain) => {
         };
       }
       
-      nextCookie = response.headers['set-cookie'][0].split(';')[0];
+      nextCookie = response.headers['set-cookie'];
       return response;
     });
 
