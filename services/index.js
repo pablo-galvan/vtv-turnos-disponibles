@@ -70,7 +70,7 @@ const check = async (domain) => {
     });
 
     return response;
-  }, { concurrency: 1 });
+  }, { concurrency: 3 });
 
   const results = await Promise.allSettled(requests);
 
