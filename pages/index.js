@@ -53,6 +53,7 @@ function HomePageV2() {
               }
               
             </Grid>
+            <a href="meli://webview/?&search_mode=collapsed&cart_mode=default&navigationcp_mode=default&bar_left_button_style=back&back_action=close&authentication_mode=required&loading_mode=true&title=Ofertas&use_web_title=false&webkit-engine=2&url=https%3A%2F%2Fwww.mercadolibre.com.ar%2Fofertasresto">Abrime la pagina de ofertas</a>
           </Grid>
         </CardContent>
       </Card>
